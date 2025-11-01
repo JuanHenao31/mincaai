@@ -1,0 +1,114 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+pip-wheel-metadata/
+*.egg-info/
+dist/
+build/
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+
+# VS Code
+.vscode/
+
+# IDEs
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+
+# Node / frontend
+frontend/node_modules/
+frontend/.next/
+frontend/build/
+frontend/dist/
+frontend/.env.local
+
+# Environment files
+backend_api/.env
+backend_api/.env.local
+.env
+
+# Logs and debug outputs
+backend_api/data/llm_debug/
+backend_api/data/logs/
+*.log
+
+# Generated / temporary outputs
+/out/
+/test/
+*.xlsx
+*.csv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Coverage
+htmlcov/
+coverage.xml

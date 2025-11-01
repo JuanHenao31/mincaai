@@ -1,0 +1,13 @@
+{
+  "description": "Sample rule set for demo - instructs adding LIMITES and DEDUCIBLES columns based on unit type and value.",
+  "rules": [
+    {
+      "when": {"unit_type_contains": "camion"},
+      "then": {"LIMITES": "100000", "DEDUCIBLES": "calculated_as_1_percent_of_value"}
+    },
+    {
+      "when": {"unit_type_contains": "auto"},
+      "then": {"LIMITES": "50000", "DEDUCIBLES": "calculated_as_1_percent_of_value"}
+    }
+  ]
+}
