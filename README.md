@@ -32,7 +32,7 @@ Diagrama macro (componentes y flujo):
 
 ```mermaid
 flowchart LR
-  A[Frontend (Next.js)] -->|POST Upload| B[Backend (FastAPI)]
+  A[Frontend Next.js] -->|POST Upload| B[Backend FastAPI]
   B --> C[Excel Utils]
   C --> D[Detect & Clean Tables]
   D --> E[LLM Service]
@@ -51,21 +51,21 @@ Detalle del flujo de petición `/export`:
 
 ```mermaid
 sequenceDiagram
-  participant U as User (Browser)
+  participant U as User Browser
   participant FE as Frontend
   participant BE as Backend
-  participant LL as LLM (OpenAI)
+  participant LL as LLM OpenAI
   U->>FE: Subir archivo .xlsx + sheet
-  FE->>BE: POST /export (multipart)
-  BE->>BE: Read bytes, detect tables (excel utils)
-  BE->>BE: Clean / normalize table(s)
+  FE->>BE: POST /export multipart
+  BE->>BE: Read bytes, detect tables excel utils
+  BE->>BE: Clean / normalize tables
   BE->>LL: (if key) call LLM with CSV-in-prompt
   LL-->>BE: CSV text
   BE->>BE: sanitize & parse CSV -> DataFrame
   BE->>BE: apply fallback rules if LLM missing/failed
-  BE->>BE: write Excel bytes (one sheet per transformed table)
-  BE-->>FE: StreamingResponse (xlsx)
-  FE-->>U: archivo modificado (download)
+  BE->>BE: write Excel bytes one sheet per transformed table
+  BE-->>FE: StreamingResponse xlsx
+  FE-->>U: archivo modificado download
 ```
 
 ---
