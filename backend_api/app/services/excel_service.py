@@ -14,7 +14,7 @@ import numpy as np
 
 BASE_DIR = Path(__file__).resolve().parents[3]
 DATA_DIR = BASE_DIR / "data"
-SAMPLE_RULES = DATA_DIR / "sample_test3.json"
+SAMPLE_RULES = DATA_DIR / "sample3_test.json" 
 
 
 async def process_export(file: UploadFile, sheet: str) -> Tuple[bytes, str]:
@@ -52,9 +52,12 @@ async def process_export(file: UploadFile, sheet: str) -> Tuple[bytes, str]:
 
     # Load rules if available
     rules: Dict[str, Any] = {}
+    print(f"Loading sample rules from {SAMPLE_RULES}")
+    print(f"Existe: {SAMPLE_RULES.exists()}")
     if SAMPLE_RULES.exists():
         try:
             rules = json.loads(SAMPLE_RULES.read_text(encoding="utf-8"))
+            print(f"Loaded sample rules from {SAMPLE_RULES}")
         except Exception:
             rules = {}
 

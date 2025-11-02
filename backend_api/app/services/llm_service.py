@@ -33,7 +33,13 @@ HOJA DE ENTRADA ({sheet_name}):
 Recuerda:
 - Devuelve ÚNICAMENTE el CSV final (con encabezado).
 - Nada de explicaciones ni texto extra.
+- IMPORTANTE: Algunos valores (por ejemplo en la columna `descripcion`) pueden contener comas como separador de miles (ej. "31,500 LTS"). Para evitar que el CSV quede mal formado, haz una de las dos cosas (preferencia 1):
+    1) Reemplaza TODAS las comas internas dentro del campo `descripcion` por puntos (.) — ej. "31,500 LTS" -> "31.500 LTS" — y asegúrate de que el CSV resultante tenga el mismo número de columnas en todas las filas.
+    2) Si prefieres no reemplazar, encierra entrecomillado DOBLE (") cualquier campo que pueda contener comas.
+
+El objetivo es que el CSV devuelto sea válido y pueda ser leído por pandas.read_csv sin causar errores de tokenización.
 """
+
 
 
 def _sanitize_llm_text_to_csv(text: str) -> str:
@@ -69,7 +75,7 @@ def _sanitize_llm_text_to_csv(text: str) -> str:
     return csv_text
 
 
-def _call_openai_csv(system_prompt: str, user_prompt: str, model: str = "gpt-5.1-mini",
+def _call_openai_csv(system_prompt: str, user_prompt: str, model: str = "gpt-4o-mini",
                      max_retries: int = 2, timeout: int = 30) -> str:
     """Call OpenAI ChatCompletion and expect text output containing a CSV.
 
@@ -90,7 +96,12 @@ def _call_openai_csv(system_prompt: str, user_prompt: str, model: str = "gpt-5.1
     last_err = None
     while attempt <= max_retries:
         try:
-            resp = openai.ChatCompletion.create(
+            from openai import OpenAI
+
+            # instantiate client with API key from environment (validated above)
+            client = OpenAI(api_key=api_key)
+
+            resp = client.chat.completions.create(
                 model=model,
                 temperature=0,
                 messages=[
@@ -188,7 +199,7 @@ def transform_sheet_with_rules(df: pd.DataFrame, rules: Dict[str, Any], model: O
                                                   sheet_name="sheet")
         raw = None
         try:
-            raw = _call_openai_csv(PROMPT_SYSTEM, user_prompt, model=(model or "gpt-5.1-mini"), timeout=timeout)
+            raw = _call_openai_csv(PROMPT_SYSTEM, user_prompt, model=(model or "gpt-4o-mini"), timeout=timeout)
             csv_text = _sanitize_llm_text_to_csv(raw)
             out_df = pd.read_csv(io.StringIO(csv_text))
             return out_df

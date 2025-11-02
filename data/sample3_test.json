@@ -1,0 +1,115 @@
+{
+  "coberturas_por_tipo": {
+    "TRACTOS": {
+      "tipo_cobertura": "AMPLIA",
+      "coberturas": {
+        "DANOS MATERIALES": {
+          "LIMITES": "VALOR CONVENIDO",
+          "DEDUCIBLES": "10 %"
+        },
+        "ROBO TOTAL": {
+          "LIMITES": "VALOR CONVENIDO",
+          "DEDUCIBLES": "10 %"
+        },
+        "RESPONSABILIDAD CIVIL POR DANOS A TERCEROS": {
+          "LIMITES": "$US 6 000 000",
+          "DEDUCIBLES": "N/A"
+        },
+        "RESPONSABILIDAD CIVIL POR FALLECIMIENTO A PERSONAS": {
+          "LIMITES": "$US 2 000 000",
+          "DEDUCIBLES": "N/A"
+        }
+      }
+    },
+    "REMOLQUES": {
+      "tipo_cobertura": "AMPLIA",
+      "coberturas": {
+        "DANOS MATERIALES": {
+          "LIMITES": "VALOR CONVENIDO",
+          "DEDUCIBLES": "5 %"
+        },
+        "ROBO TOTAL": {
+          "LIMITES": "VALOR CONVENIDO",
+          "DEDUCIBLES": "5 %"
+        }
+      }
+    }
+  },
+  "reglas_asignacion": {
+    "descripcion": "Se debe agregar las columnas LIMITES y DEDUCIBLES de DANOS MATERIALES y ROBO TOTAL basándose en el TIPO_DE_UNIDAD de cada vehículo",
+    "columnas_a_agregar": [
+      "DANOS MATERIALES LIMITES",
+      "DANOS MATERIALES DEDUCIBLES",
+      "ROBO TOTAL LIMITES",
+      "ROBO TOTAL DEDUCIBLES"
+    ],
+    "mapeo_columnas": {
+      "columna_referencia": "TIPO DE UNIDAD",
+      "columna_referencia_index": "A"
+    }
+  },
+  "ejemplo_output_esperado": {
+    "descripcion": "Ejemplo de cómo deben lucir las filas después de la transformación",
+    "ejemplos": [
+      {
+        "fila_original": {
+          "TIPO DE UNIDAD": "TRACTO",
+          "Desci.": "TR FREIGHTLINER NEW CASCADIA DD16 510 STD",
+          "MOD": "2022",
+          "NO.SERIE": "3AKJHPDV7NSNC4904"
+        },
+        "columnas_agregadas": {
+          "DANOS MATERIALES LIMITES": "VALOR CONVENIDO",
+          "DANOS MATERIALES DEDUCIBLES": "10 %",
+          "ROBO TOTAL LIMITES": "VALOR CONVENIDO",
+          "ROBO TOTAL DEDUCIBLES": "10 %"
+        }
+      },
+      {
+        "fila_original": {
+          "TIPO DE UNIDAD": "TANQUE",
+          "Desci.": "TANQUE ATRO 31,500 LTS",
+          "MOD": "2025",
+          "NO.SERIE": "3ELDDMS51S6000787"
+        },
+        "columnas_agregadas": {
+          "DANOS MATERIALES LIMITES": "VALOR CONVENIDO",
+          "DANOS MATERIALES DEDUCIBLES": "5 %",
+          "ROBO TOTAL LIMITES": "VALOR CONVENIDO",
+          "ROBO TOTAL DEDUCIBLES": "5 %"
+        }
+      },
+      {
+        "fila_original": {
+          "TIPO DE UNIDAD": "DOLLY",
+          "Desci.": "DOLLY ATRO",
+          "MOD": "2025",
+          "NO.SERIE": "3EMDHMS46S6000791"
+        },
+        "columnas_agregadas": {
+          "DANOS MATERIALES LIMITES": "VALOR CONVENIDO",
+          "DANOS MATERIALES DEDUCIBLES": "10 %",
+          "ROBO TOTAL LIMITES": "VALOR CONVENIDO",
+          "ROBO TOTAL DEDUCIBLES": "10 %"
+        }
+      }
+    ]
+  },
+  "estructura_excel_final": {
+    "descripcion": "Estructura esperada del Excel modificado",
+    "columnas_finales": [
+      "A: TIPO DE UNIDAD",
+      "B: Desci.",
+      "C: MOD",
+      "D: NO.SERIE",
+      "F: DANOS MATERIALES LIMITES",
+      "G: DANOS MATERIALES DEDUCIBLES",
+      "H: ROBO TOTAL LIMITES",
+      "I: ROBO TOTAL DEDUCIBLES"
+    ],
+    "notas": [
+      "Mantener el ancho de columnas original",
+      "Las nuevas columnas deben insertarse después de la columna D (NO.SERIE)"
+    ]
+  }
+}

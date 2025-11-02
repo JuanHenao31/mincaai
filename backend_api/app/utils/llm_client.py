@@ -34,7 +34,12 @@ def call_openai_for_enrichment(df: pd.DataFrame, rules: Any) -> Any:
     )
 
     try:
-        resp = openai.ChatCompletion.create(
+        from openai import OpenAI
+
+        # instantiate client with API key from environment (validated above)
+        client = OpenAI(api_key=api_key)
+
+        resp = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.0,
