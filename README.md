@@ -1,4 +1,6 @@
- # Excel AI Modifier — Proyecto (Frontend + Backend)
+# Excel AI Modifier — Proyecto (Frontend + Backend)
+
+English version: [README.en.md](./README.en.md) • Versión en español: [README.md](./README.md)
 
 Un proyecto que limpia, detecta tablas en archivos Excel y aplica transformaciones basadas en reglas usando un LLM (OpenAI) o una implementación determinista como fallback. Esta guía explica cómo está diseñada la solución, cómo ejecutarla y cómo configurarla paso a paso.
 
